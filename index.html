@@ -110,15 +110,16 @@
   <div id="error"></div>
 
   <script>
-    // GitHub Release download location
+    // Cloudflare Worker proxy for the original itch.io Unity build.
+    // The Worker accepts lowercase filenames and maps them to itch.io's exact casing.
     const buildUrl =
-      "https://github.com/owenfun07/test/releases/download/kkt-build-1.1.0-separate-files/";
+      "https://nsmb-itch-proxy.owen-vozzella.workers.dev/";
 
     // Individual Unity WebGL files
-    const loaderUrl = buildUrl + "WebGl.loader.js";
-    const frameworkUrl = buildUrl + "WebGl.framework.js.unityweb";
-    const codeUrl = buildUrl + "WebGl.wasm.unityweb";
-    const dataUrl = buildUrl + "WebGl.data.unityweb";
+    const loaderUrl = buildUrl + "webgl.loader.js";
+    const frameworkUrl = buildUrl + "webgl.framework.js.unityweb";
+    const codeUrl = buildUrl + "webgl.wasm.unityweb";
+    const dataUrl = buildUrl + "webgl.data.unityweb";
 
     const canvas = document.getElementById("game");
     const status = document.getElementById("status");
@@ -185,7 +186,7 @@
       showError(
         "Could not load the Unity loader script.\n\n" +
         "URL: " + loaderUrl + "\n\n" +
-        "Check that the release asset exists and is accessible."
+        "Check that the Cloudflare Worker is deployed and reachable."
       );
     };
 
